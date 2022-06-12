@@ -26,7 +26,8 @@ const cloudinaryUploader = multer({
 
 postRouter.post("/", async (req, res, next) => {
   try {
-    const post = await PostModel.create(req.body);
+    const post = await new PostModel(req.body);
+    await post.save();
     res.send(post);
   } catch (error) {
     next(error);
